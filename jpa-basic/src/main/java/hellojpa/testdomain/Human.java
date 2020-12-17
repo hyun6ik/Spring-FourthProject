@@ -18,4 +18,10 @@ public class Human {
     private Team team;
 
     private String name;
+
+
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getHumans().add(this);
+    }
 }

@@ -19,4 +19,10 @@ public class Team {
 
     @OneToMany(mappedBy = "team")
     private List<Human> humans = new ArrayList<>();
+
+
+    public void addMember(Human human) {
+        human.setTeam(this);
+        humans.add(human);
+    }
 }

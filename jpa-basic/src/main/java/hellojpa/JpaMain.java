@@ -24,21 +24,20 @@ public class JpaMain {
             team.setName("TeamA");
             em.persist(team);
 
+
             Human human = new Human();
             human.setName("Yoon");
-            human.setTeam(team);
+
+            team.addMember(human);
             em.persist(human);
+
+
+
+
+
 
             em.flush();
             em.clear();
-
-            Human findHuman = em.find(Human.class, human.getId());
-            List<Human> humans = findHuman.getTeam().getHumans();
-
-            for (Human h : humans) {
-                System.out.println("h.getName() = " + h.getName());
-                
-            }
 
 
             tx.commit();
