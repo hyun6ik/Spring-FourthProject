@@ -7,19 +7,16 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class OrderItem {
+public class CategoryItem {
     @Id
     @GeneratedValue
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "order_id")
-    private Order order;
-
-    @ManyToOne
-    @JoinColumn(name = "item_id")
+    @JoinColumn(name ="item_id")
     private Item item;
 
-    private int orderPrice;
-    private int count;
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 }

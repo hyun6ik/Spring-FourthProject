@@ -14,7 +14,6 @@ import java.util.List;
 public class Order {
     @Id
     @GeneratedValue
-    @Column(name = "order_id")
     private Long id;
 
     @ManyToOne
@@ -23,6 +22,10 @@ public class Order {
 
     @OneToMany(mappedBy = "order")
     private List<OrderItem> orderitems = new ArrayList<>();
+
+    @OneToOne
+    @JoinColumn(name = "delivery_id")
+    private Delivery delivery;
 
     private LocalDateTime Date;
 
