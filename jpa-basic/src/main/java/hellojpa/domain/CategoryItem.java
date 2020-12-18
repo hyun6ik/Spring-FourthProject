@@ -7,7 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter @Setter
-public class CategoryItem {
+public class CategoryItem extends BaseEntity{
     @Id
     @GeneratedValue
     private Long id;

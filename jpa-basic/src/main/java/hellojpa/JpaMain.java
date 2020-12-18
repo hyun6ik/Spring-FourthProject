@@ -1,5 +1,6 @@
 package hellojpa;
 
+import hellojpa.domain.Book;
 import hellojpa.domain.Member;
 import hellojpa.domain.Movie;
 
@@ -20,13 +21,11 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAuthor("김영한");
 
-            Member member = new Member();
-            member.setName("Hyunsik");
-            member.setCreatedBy("Me");
-            member.setCreateDate(LocalDateTime.now());
-
-            em.persist(member);
+            em.persist(book);
 
             em.flush();
             em.clear();
