@@ -1,11 +1,14 @@
 package hellojpa;
 
+import hellojpa.domain.Member;
 import hellojpa.domain.Movie;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
+
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -18,19 +21,16 @@ public class JpaMain {
 
         try {
 
-            Movie movie = new Movie();
-            movie.setDirector("놀란");
-            movie.setActor("황정민");
-            movie.setName("배트맨 다크나이트");
-            movie.setPrice(13000);
+            Member member = new Member();
+            member.setName("Hyunsik");
+            member.setCreatedBy("Me");
+            member.setCreateDate(LocalDateTime.now());
 
-            em.persist(movie);
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + findMovie);
 
 
             tx.commit();
