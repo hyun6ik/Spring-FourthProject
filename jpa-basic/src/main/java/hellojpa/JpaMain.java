@@ -1,9 +1,6 @@
 package hellojpa;
 
-import hellojpa.domain.testdomain.Child;
-import hellojpa.domain.testdomain.Human;
-import hellojpa.domain.testdomain.Parent;
-import hellojpa.domain.testdomain.Team;
+import hellojpa.domain.testdomain.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,7 +16,11 @@ public class JpaMain {
         tx.begin();
 
         try {
-
+            Human human = new Human();
+            human.setName("Yoon");
+            human.setHomeAddress(new Address());
+            human.setWorkPeriod(new Period());
+            em.persist(human);
 
             tx.commit();
         } catch (Exception e){

@@ -26,12 +26,15 @@ public class Human {
     @JoinColumn(name = "locker_id")
     private Locker locker;
 
-
-
     @ManyToMany
     @JoinTable(name = "member_product")
     private List<Product> products = new ArrayList<>();
 
+    @Embedded
+    private Period workPeriod;
+
+    @Embedded
+    private Address homeAddress;
 
 
     public void changeTeam(Team team) {
