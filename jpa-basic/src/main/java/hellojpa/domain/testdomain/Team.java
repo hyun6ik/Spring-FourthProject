@@ -1,5 +1,6 @@
-package hellojpa.domain;
+package hellojpa.domain.testdomain;
 
+import hellojpa.domain.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-public class Team extends BaseEntity{
+public class Team extends BaseEntity {
     @Id
     @GeneratedValue
     private Long id;

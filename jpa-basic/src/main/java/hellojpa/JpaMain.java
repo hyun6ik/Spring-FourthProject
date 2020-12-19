@@ -1,10 +1,11 @@
 package hellojpa;
 
-import hellojpa.domain.*;
-import org.hibernate.Hibernate;
+import hellojpa.domain.testdomain.Child;
+import hellojpa.domain.testdomain.Human;
+import hellojpa.domain.testdomain.Parent;
+import hellojpa.domain.testdomain.Team;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.List;
 
 
@@ -18,23 +19,16 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Human human = new Human();
-            human.setName("Yoon");
-            human.setTeam(team);
-            em.persist(human);
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
-
+            em.persist(parent);
 
 
-            em.flush();
-            em.clear();
-
-            List<Human> humans = em.createQuery("select m from Human m", Human.class)
-                    .getResultList();
 
 
             tx.commit();
