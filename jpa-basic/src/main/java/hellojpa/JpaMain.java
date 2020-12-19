@@ -1,13 +1,11 @@
 package hellojpa;
 
-import hellojpa.domain.Book;
-import hellojpa.domain.Human;
-import hellojpa.domain.Member;
-import hellojpa.domain.Movie;
+import hellojpa.domain.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 
 public class JpaMain {
@@ -20,18 +18,23 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Human human1 = new Human();
-            human1.setName("Yoon");
-            em.persist(human1);
+            Team team = new Team();
+            team.setName("teamA");
+            em.persist(team);
+
+            Human human = new Human();
+            human.setName("Yoon");
+            human.setTeam(team);
+            em.persist(human);
+
+
+
 
             em.flush();
             em.clear();
 
-            Human refMember = em.getReference(Human.class, human1.getId());
-            System.out.println("refMember.getClass() = " + refMember.getClass());  //Proxy
-            Hibernate.initialize(refMember); //강제초기화
-            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
-
+            List<Human> humans = em.createQuery("select m from Human m", Human.class)
+                    .getResultList();
 
 
             tx.commit();
