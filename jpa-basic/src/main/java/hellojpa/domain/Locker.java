@@ -13,7 +13,6 @@ import javax.persistence.Id;
 public class Locker {
     @Id
     @GeneratedValue
-    @Column(name = "locker_id")
     private Long id;
 
 

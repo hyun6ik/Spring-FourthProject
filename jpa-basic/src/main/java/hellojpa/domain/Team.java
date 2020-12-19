@@ -12,7 +12,6 @@ import java.util.List;
 public class Team extends BaseEntity{
     @Id
     @GeneratedValue
-    @Column(name = "team_id")
     private Long id;
 
     private String name;

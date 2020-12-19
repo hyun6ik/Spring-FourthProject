@@ -11,7 +11,6 @@ import javax.persistence.*;
 public class HumanProduct {
     @Id
     @GeneratedValue
-    @Column(name = "order_id")
     private Long id;
 
     @ManyToOne

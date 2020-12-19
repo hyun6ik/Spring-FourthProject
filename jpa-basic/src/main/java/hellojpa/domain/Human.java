@@ -12,9 +12,9 @@ import java.util.List;
 public class Human {
     @Id
     @GeneratedValue
-    @Column(name = "human_id")
     private Long id;
 
+    private String name;
     @ManyToOne
     @JoinColumn(name = "team_id")
     private Team team;
@@ -32,8 +32,6 @@ public class Human {
     @JoinTable(name = "member_product")
     private List<Product> products = new ArrayList<>();
 
-
-    private String name;
 
 
     public void changeTeam(Team team) {

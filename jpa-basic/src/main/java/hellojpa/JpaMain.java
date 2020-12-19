@@ -1,13 +1,12 @@
 package hellojpa;
 
 import hellojpa.domain.Book;
+import hellojpa.domain.Human;
 import hellojpa.domain.Member;
 import hellojpa.domain.Movie;
+import org.hibernate.Hibernate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 
@@ -21,20 +20,24 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Book book = new Book();
-            book.setName("JPA");
-            book.setAuthor("김영한");
-
-            em.persist(book);
+            Human human1 = new Human();
+            human1.setName("Yoon");
+            em.persist(human1);
 
             em.flush();
             em.clear();
+
+            Human refMember = em.getReference(Human.class, human1.getId());
+            System.out.println("refMember.getClass() = " + refMember.getClass());  //Proxy
+            Hibernate.initialize(refMember); //강제초기화
+            System.out.println("isLoaded = " + emf.getPersistenceUnitUtil().isLoaded(refMember));
 
 
 
             tx.commit();
         } catch (Exception e){
             tx.rollback();
+            System.out.println("e = " + e);
         } finally {
             em.close();
         }
@@ -42,4 +45,6 @@ public class JpaMain {
         emf.close();
 
     }
+
 }
+
