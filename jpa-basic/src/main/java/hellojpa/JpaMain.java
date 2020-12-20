@@ -4,6 +4,10 @@ import hellojpa.domain.Address;
 import hellojpa.domain.testdomain.*;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.util.List;
 
 
 public class JpaMain {
@@ -16,12 +20,12 @@ public class JpaMain {
         tx.begin();
 
         try {
-
-
-
-
-
-
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Human> query = cb.createQuery(Human.class);
+            Root<Human> h = query.from(Human.class);
+            CriteriaQuery<Human> cq = query.select(h).where(cb.equal(h.get("name"), "Yoon"));
+            em.createQuery(cq)
+                    .getResultList();
 
 //            Human human = new Human();
 //            human.setName("Yoon");
