@@ -16,11 +16,17 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Human human = new Human();
-            human.setName("Yoon");
-            human.setHomeAddress(new Address());
-            human.setWorkPeriod(new Period());
-            em.persist(human);
+            Address address = new Address("city", "street", "10000");
+
+            Human human1 = new Human();
+            human1.setName("Yoon");
+            human1.setHomeAddress(address);
+            em.persist(human1);
+
+            Address newAddress = new Address("NewCity", address.getStreet(), address.getZipcode());
+            human1.setHomeAddress(newAddress);
+
+
 
             tx.commit();
         } catch (Exception e){
