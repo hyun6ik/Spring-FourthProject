@@ -4,6 +4,7 @@ import hellojpa.domain.testdomain.*;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Set;
 
 
 public class JpaMain {
@@ -16,15 +17,38 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Address address = new Address("city", "street", "10000");
+            Human human = new Human();
+            human.setName("Yoon");
+            human.setHomeAddress(new Address("city1","street","07949"));
 
-            Human human1 = new Human();
-            human1.setName("Yoon");
-            human1.setHomeAddress(address);
-            em.persist(human1);
+            human.getFavoriteFoods().add("치킨");
+            human.getFavoriteFoods().add("족발");
+            human.getFavoriteFoods().add("피자");
 
-            Address newAddress = new Address("NewCity", address.getStreet(), address.getZipcode());
-            human1.setHomeAddress(newAddress);
+            human.getAddressHistory().add(new AddressEntity("old1","street","07949"));
+            human.getAddressHistory().add(new AddressEntity("old2","street","07949"));
+
+            em.persist(human);
+
+            em.flush();
+            em.clear();
+
+            System.out.println("==================START==============");
+            Human findHuman = em.find(Human.class, human.getId());
+            Address newAddress = new Address("NewCity", findHuman.getHomeAddress().getStreet(), findHuman.getHomeAddress().getZipcode());
+            findHuman.setHomeAddress(newAddress);
+            //치킨 -> 한식
+            findHuman.getFavoriteFoods().remove("치킨");
+            findHuman.getFavoriteFoods().add("한식");
+
+            findHuman.getAddressHistory().remove(new AddressEntity("old1","street","07949"));
+            findHuman.getAddressHistory().add(new AddressEntity("new1","street","07949"));
+
+
+            System.out.println("findHuman.getHomeAddress() = " + findHuman.getHomeAddress().getCity());
+            System.out.println("findHuman.getHomeAddress() = " + findHuman.getHomeAddress().getStreet());
+            System.out.println("findHuman.getHomeAddress() = " + findHuman.getHomeAddress().getZipcode());
+
 
 
 
