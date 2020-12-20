@@ -1,8 +1,6 @@
 package hellojpa;
 
-import hellojpa.domain.testdomain.Address;
-
-import java.util.Arrays;
+import hellojpa.domain.Address;
 
 public class ValueMain {
     public static void main(String[] args) {

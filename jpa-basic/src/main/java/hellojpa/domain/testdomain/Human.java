@@ -1,5 +1,6 @@
 package hellojpa.domain.testdomain;
 
+import hellojpa.domain.Address;
 import lombok.Getter;
 import lombok.Setter;
 
